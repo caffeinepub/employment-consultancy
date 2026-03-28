@@ -35,9 +35,32 @@ const LINKEDIN_URL =
 
 const NAV_LINKS = [
   { label: "Services", href: "#services" },
+  { label: "Media", href: "#media" },
   { label: "About", href: "#about" },
+  { label: "Why Trust Us", href: "#why-trust-us" },
+  { label: "Process", href: "#how-process-works" },
+  { label: "Alumni Promise", href: "#alumni-promise" },
   { label: "Testimonials", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
+];
+
+const MEDIA_IMAGES = [
+  {
+    src: "/assets/uploads/chatgpt_image_feb_20_2026_12_44_59_pm-019d340d-6d20-772b-a840-1aa699bbf3df-1.png",
+    alt: "US Workforce Transition Services promotional banner",
+  },
+  {
+    src: "/assets/uploads/99bd1bcb-f277-404e-b9d5-ae7908413346-019d340d-84c6-774a-ace1-033ab02a55d7-2.png",
+    alt: "Career services and job placement resources",
+  },
+  {
+    src: "/assets/uploads/chatgpt_image_feb_16_2026_12_19_16_pm-019d340d-9dfc-736e-9884-c85dd862c276-3.png",
+    alt: "Employment consultancy services overview",
+  },
+  {
+    src: "/assets/uploads/d6d6b773-90c0-4d16-882a-5f2fea92ee42-019d340d-9f9a-73b9-83f9-6e8b24e7cca1-4.png",
+    alt: "Workforce transition and career development",
+  },
 ];
 
 const SERVICES = [
@@ -125,6 +148,33 @@ const STATS = [
   { value: "500+", label: "Successful Placements" },
   { value: "15+", label: "Years Experience" },
   { value: "98%", label: "Client Satisfaction" },
+];
+
+const TRUST_ITEMS = [
+  {
+    icon: CheckCircle2,
+    title: "Verified Job Opportunities",
+    description:
+      "Every opportunity we present is thoroughly vetted and confirmed with real employers — no ghost listings, no surprises.",
+  },
+  {
+    icon: Shield,
+    title: "Structured & Transparent Process",
+    description:
+      "We keep you informed at every step with a clear, organized process so you always know exactly where you stand.",
+  },
+  {
+    icon: Users,
+    title: "Personalized Career Support",
+    description:
+      "Our dedicated consultants tailor guidance to your unique background, goals, and industry so you get support that actually fits.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Long-Term Success Focus",
+    description:
+      "We measure our success by yours — building lasting relationships and career trajectories, not just quick placements.",
+  },
 ];
 
 const CLIENT_STORIES = [
@@ -304,7 +354,7 @@ export default function App() {
                 <a
                   key={link.label}
                   href={link.href}
-                  data-ocid={`nav.${link.label.toLowerCase()}.link`}
+                  data-ocid={`nav.${link.label.toLowerCase().replace(/\s+/g, "-")}.link`}
                   className="text-sm font-medium text-muted-foreground hover:text-navy transition-colors"
                 >
                   {link.label}
@@ -359,7 +409,7 @@ export default function App() {
               <a
                 key={link.label}
                 href={link.href}
-                data-ocid={`nav.mobile.${link.label.toLowerCase()}.link`}
+                data-ocid={`nav.mobile.${link.label.toLowerCase().replace(/\s+/g, "-")}.link`}
                 className="text-sm font-medium text-foreground"
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -558,10 +608,58 @@ export default function App() {
         </div>
       </section>
 
+      {/* ───── MEDIA ───── */}
+      <section
+        id="media"
+        className="py-20 lg:py-28 bg-white"
+        data-ocid="media.section"
+      >
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-14"
+          >
+            <p
+              className="text-xs font-semibold uppercase tracking-widest mb-3"
+              style={{ color: "oklch(0.62 0.12 187)" }}
+            >
+              Media & Resources
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-navy">
+              Our Featured Resources
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {MEDIA_IMAGES.map((image, i) => (
+              <motion.div
+                key={image.src}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="rounded-2xl shadow-brand bg-white overflow-hidden border border-border"
+                data-ocid={`media.item.${i + 1}`}
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-auto object-contain"
+                />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ───── ABOUT ───── */}
       <section
         id="about"
-        className="py-20 lg:py-28 bg-white"
+        className="py-20 lg:py-28"
+        style={{ backgroundColor: "oklch(0.97 0.01 228)" }}
         data-ocid="about.section"
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -686,6 +784,388 @@ export default function App() {
               </div>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* ───── WHY TRUST US ───── */}
+      <section
+        id="why-trust-us"
+        className="py-20 lg:py-28 bg-white"
+        data-ocid="why-trust-us.section"
+      >
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-14"
+          >
+            <p
+              className="text-xs font-semibold uppercase tracking-widest mb-3"
+              style={{ color: "oklch(0.62 0.12 187)" }}
+            >
+              Our Commitment
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-navy mb-4">
+              Why Trust Us
+            </h2>
+            <p className="text-base text-muted-foreground max-w-xl mx-auto">
+              In today's job market, trust is everything. That's why our
+              approach is different:
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {TRUST_ITEMS.map((item, i) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="bg-white rounded-2xl p-6 shadow-card hover:shadow-brand transition-shadow border border-border"
+                data-ocid={`why-trust-us.item.${i + 1}`}
+              >
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
+                  style={{ backgroundColor: "oklch(0.22 0.055 218 / 0.08)" }}
+                >
+                  <item.icon
+                    className="w-6 h-6"
+                    style={{ color: "oklch(0.22 0.055 218)" }}
+                  />
+                </div>
+                <h3 className="text-base font-bold text-navy mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {item.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-14 max-w-3xl mx-auto"
+          >
+            <img
+              src="/assets/uploads/gemini_generated_image_waf45mwaf45mwaf4-019d355e-7f7b-708f-b59c-5a21d9849cac-2.png"
+              alt="Why Trust Us — US Workforce Transition Services"
+              className="w-full rounded-2xl shadow-lg object-contain"
+            />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ───── HOW PROCESS WORKS ───── */}
+      <section
+        id="how-process-works"
+        className="py-20 lg:py-28"
+        style={{ backgroundColor: "oklch(0.97 0.01 228)" }}
+        data-ocid="how-process-works.section"
+      >
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <p
+              className="text-xs font-semibold uppercase tracking-widest mb-3"
+              style={{ color: "oklch(0.62 0.12 187)" }}
+            >
+              How Our Process Works
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-navy mb-4">
+              Our Verified Journey: From Resume to Placement
+            </h2>
+            <p className="text-base text-muted-foreground max-w-xl mx-auto">
+              From resume review to placement support — a clear, structured
+              7-step journey designed to get you hired.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="max-w-3xl mx-auto mb-14"
+          >
+            <img
+              src="/assets/uploads/gemini_generated_image_waf45mwaf45mwaf4-019d355e-7df1-7278-9008-5295127617a9-1.png"
+              alt="Our Verified Journey — 7-Step Process"
+              className="w-full rounded-2xl shadow-lg object-contain"
+            />
+          </motion.div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+            {[
+              {
+                step: 1,
+                title: "Resume Review",
+                desc: "Deconstruction & analysis of your current resume",
+              },
+              {
+                step: 2,
+                title: "Resume Crafting",
+                desc: "Professional writing tailored to your target role",
+              },
+              {
+                step: 3,
+                title: "Cover Letter Formation",
+                desc: "Personalized & impactful cover letter",
+              },
+              {
+                step: 4,
+                title: "JD Alignment",
+                desc: "Resume & cover letter matched to job descriptions",
+              },
+              {
+                step: 5,
+                title: "Selective Matching",
+                desc: "Pick from curated top job options",
+              },
+              {
+                step: 6,
+                title: "Targeted Application",
+                desc: "Precision submission to the right employers",
+              },
+              {
+                step: 7,
+                title: "Interview Preparation",
+                desc: "Mock interviews & practical tips",
+              },
+            ].map(({ step, title, desc }, i) => (
+              <motion.div
+                key={step}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.07 }}
+                className="bg-white rounded-2xl p-5 shadow-card hover:shadow-brand transition-shadow border border-border"
+                data-ocid={`how-process-works.item.${step}`}
+              >
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 text-sm font-bold"
+                  style={{
+                    backgroundColor: "oklch(0.22 0.055 218 / 0.08)",
+                    color: "oklch(0.22 0.055 218)",
+                  }}
+                >
+                  {step}
+                </div>
+                <h3 className="text-sm font-bold text-navy mb-1">{title}</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  {desc}
+                </p>
+              </motion.div>
+            ))}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 7 * 0.07 }}
+              className="bg-navy rounded-2xl p-5 shadow-card col-span-2 sm:col-span-1 lg:col-span-2"
+              data-ocid="how-process-works.item.8"
+              style={{ backgroundColor: "oklch(0.22 0.055 218)" }}
+            >
+              <div
+                className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 text-sm font-bold"
+                style={{
+                  backgroundColor: "oklch(1 0 0 / 0.15)",
+                  color: "white",
+                }}
+              >
+                ★
+              </div>
+              <h3 className="text-sm font-bold text-white mb-1">
+                Placement Support
+              </h3>
+              <p
+                className="text-xs leading-relaxed"
+                style={{ color: "oklch(0.85 0.03 228)" }}
+              >
+                Ongoing support until you land the job
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ───── ALUMNI PROMISE ───── */}
+      <section
+        id="alumni-promise"
+        className="py-20 lg:py-28"
+        style={{
+          background:
+            "linear-gradient(135deg, oklch(0.18 0.04 240) 0%, oklch(0.22 0.05 250) 100%)",
+        }}
+        data-ocid="alumni-promise.section"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-10"
+          >
+            <img
+              src="/assets/uploads/gemini_generated_image_2enywp2enywp2eny_1-019d35da-be0e-757e-8257-4fd9709e3b7a-1.png"
+              alt="Alumni Career Bridge Banner"
+              className="w-full rounded-2xl object-cover"
+            />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-10"
+          >
+            <span
+              className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase mb-4"
+              style={{
+                backgroundColor: "oklch(0.75 0.15 85)",
+                color: "oklch(0.15 0.03 240)",
+              }}
+            >
+              Alumni Advantage
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-4">
+              The Alumni Promise
+            </h2>
+            <p
+              className="text-lg md:text-xl font-medium max-w-3xl mx-auto"
+              style={{ color: "oklch(0.85 0.08 85)" }}
+            >
+              "We didn't just study at schools—we understand the whole process."
+            </p>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="max-w-4xl mx-auto text-center mb-14"
+          >
+            <p
+              className="text-base md:text-lg leading-relaxed mb-6"
+              style={{ color: "oklch(0.82 0.03 230)" }}
+            >
+              As alumni of{" "}
+              <strong className="text-white">Westcliff University</strong> and{" "}
+              <strong className="text-white">UC Irvine</strong>, we understand
+              the unique challenges international students face. We remember the
+              stress of CPT deadlines, the pressure of the OPT clock, and the
+              complexity of H1B sponsorship.
+            </p>
+            <p
+              className="text-base md:text-lg leading-relaxed mb-6"
+              style={{ color: "oklch(0.82 0.03 230)" }}
+            >
+              We founded US Workforce Transition Services Ltd to be the resource
+              we wish we had. Because we've sat in your classrooms and walked
+              your campus, we provide more than just consulting — we provide a
+              roadmap based on real, lived experience and government-verified
+              data. We aren't just your consultants; we are your fellow alumni,
+              and your success is our mission.
+            </p>
+          </motion.div>
+          <div className="grid md:grid-cols-2 gap-6 mb-12">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="rounded-2xl p-8 border"
+              style={{
+                backgroundColor: "oklch(0.25 0.05 250)",
+                borderColor: "oklch(0.75 0.15 85 / 0.3)",
+              }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div
+                  className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm"
+                  style={{
+                    backgroundColor: "oklch(0.75 0.15 85)",
+                    color: "oklch(0.15 0.03 240)",
+                  }}
+                >
+                  WU
+                </div>
+                <h3 className="text-xl font-bold text-white">
+                  Westcliff Specific Mastery
+                </h3>
+              </div>
+              <p
+                style={{ color: "oklch(0.82 0.03 230)" }}
+                className="leading-relaxed"
+              >
+                We understand the Westcliff curriculum and how to align your
+                professional development with your academic requirements for
+                seamless CPT/OPT compliance.
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="rounded-2xl p-8 border"
+              style={{
+                backgroundColor: "oklch(0.25 0.05 250)",
+                borderColor: "oklch(0.75 0.15 85 / 0.3)",
+              }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div
+                  className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm"
+                  style={{
+                    backgroundColor: "oklch(0.55 0.18 240)",
+                    color: "white",
+                  }}
+                >
+                  UCI
+                </div>
+                <h3 className="text-xl font-bold text-white">
+                  UCI Innovation & Network
+                </h3>
+              </div>
+              <p
+                style={{ color: "oklch(0.82 0.03 230)" }}
+                className="leading-relaxed"
+              >
+                Leveraging the prestige and high-tier professional networks of
+                the UC Irvine ecosystem to open doors in IT, business,
+                engineering, and finance.
+              </p>
+            </motion.div>
+          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-center rounded-2xl py-8 px-6"
+            style={{
+              backgroundColor: "oklch(0.75 0.15 85 / 0.12)",
+              border: "1px solid oklch(0.75 0.15 85 / 0.4)",
+            }}
+          >
+            <p className="text-lg md:text-xl font-semibold text-white">
+              "Ask us about our experience transitioning from Westcliff/UCI to
+              the professional workforce during your first call!"
+            </p>
+          </motion.div>
         </div>
       </section>
 
@@ -838,7 +1318,8 @@ export default function App() {
       {/* ───── CONTACT ───── */}
       <section
         id="contact"
-        className="py-20 lg:py-28 bg-white"
+        className="py-20 lg:py-28"
+        style={{ backgroundColor: "oklch(0.97 0.01 228)" }}
         data-ocid="contact.section"
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1137,7 +1618,7 @@ export default function App() {
                 <a
                   key={link.label}
                   href={link.href}
-                  data-ocid={`footer.${link.label.toLowerCase()}.link`}
+                  data-ocid={`footer.${link.label.toLowerCase().replace(/\s+/g, "-")}.link`}
                   className="text-xs transition-opacity hover:opacity-75"
                   style={{ color: "oklch(1 0 0 / 0.6)" }}
                 >
