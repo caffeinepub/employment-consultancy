@@ -1324,11 +1324,9 @@ export default function App() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <a href="#hero" className="flex items-center gap-2.5 shrink-0">
-              <img
-                src="/assets/uploads/gemini_generated_image_k9e53pk9e53pk9e5-019d374d-4ef9-7359-b9c3-2ca60b3ec8ef-1.png"
-                alt="USWTS Logo"
-                className="h-10 w-auto object-contain"
-              />
+              <div className="w-8 h-8 rounded-lg bg-navy flex items-center justify-center">
+                <Briefcase className="w-4 h-4 text-white" />
+              </div>
               <span className="text-lg font-bold text-navy leading-tight">
                 USWTS
                 <span className="block text-xs font-medium text-teal tracking-widest uppercase leading-none">
@@ -1428,99 +1426,113 @@ export default function App() {
       {/* ───── HERO ───── */}
       <section
         id="hero"
-        className="relative w-full pt-28 pb-20 lg:pt-36 lg:pb-28 overflow-hidden"
+        className="pt-28 pb-20 lg:pt-36 lg:pb-28 bg-white"
         data-ocid="hero.section"
-        style={{
-          backgroundImage:
-            "url('/assets/uploads/gemini_generated_image_q5lxnlq5lxnlq5lx-019d3773-ccd4-772a-a7dc-6845d0077020-1.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
       >
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40 pointer-events-none" />
-
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="max-w-2xl"
-          >
-            <img
-              src="/assets/uploads/gemini_generated_image_k9e53pk9e53pk9e5-019d374d-4ef9-7359-b9c3-2ca60b3ec8ef-1.png"
-              alt="US Workforce Transition Services Logo"
-              className="w-48 object-contain mb-6 brightness-0 invert"
-            />
-            <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-teal mb-4">
-              <Star className="w-3.5 h-3.5" />
-              California's Premier Employment Consultancy partnered with Beacon
-              Hill
-            </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold text-white leading-tight mb-4">
-              Empowering Global Talent.
-              <br />
-              <span style={{ color: "oklch(0.72 0.14 187)" }}>
-                Building Exceptional Careers.
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left copy */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+            >
+              <img
+                src="/assets/uploads/gemini_generated_image_k9e53pk9e53pk9e5-019d374d-4ef9-7359-b9c3-2ca60b3ec8ef-1.png"
+                alt="US Workforce Transition Services Logo"
+                className="w-48 object-contain mb-6"
+              />
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-teal mb-4">
+                <Star className="w-3.5 h-3.5" />
+                California's Premier Employment Consultancy partnered with
+                Beacon Hill
               </span>
-            </h1>
-            <p className="text-sm font-bold text-white/90 mb-6">
-              👉 &ldquo;Career + Financial Stability Solutions for Students
-              &amp; Professionals in the U.S&rdquo;
-            </p>
-            <p className="text-base text-white/80 leading-relaxed mb-4 max-w-lg">
-              At US Workforce Transition Services Ltd., we specialize in helping
-              international students and professionals navigate the U.S. job
-              market with confidence. From landing your first role to advancing
-              your career, we connect you with trusted employers and real,
-              verified opportunities across the United States.
-            </p>
-            <p className="text-base text-white/80 leading-relaxed mb-8 max-w-lg">
-              Whether you&apos;re building your future or growing your team, we
-              turn ambition into results.
-            </p>
-            <div className="flex flex-wrap gap-4 mb-10">
-              <a href="#contact">
-                <Button
-                  size="lg"
-                  data-ocid="hero.find_talent.button"
-                  className="text-white hover:opacity-90 transition-opacity px-7"
-                  style={{
-                    backgroundColor: "oklch(0.22 0.055 218)",
-                  }}
-                >
-                  Find Talent
-                </Button>
-              </a>
-              <a href="#services">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  data-ocid="hero.explore.button"
-                  className="border-2 bg-white/10 text-white hover:bg-white hover:text-navy transition-all px-7"
-                  style={{
-                    borderColor: "oklch(0.72 0.14 187)",
-                  }}
-                >
-                  Explore Opportunities
-                </Button>
-              </a>
-            </div>
-            {/* Stat badge */}
-            <div className="inline-flex items-center gap-3 bg-white/15 backdrop-blur-sm border border-white/25 rounded-xl px-5 py-3">
-              <div
-                className="w-9 h-9 rounded-full flex items-center justify-center"
-                style={{ backgroundColor: "oklch(0.62 0.12 187 / 0.4)" }}
-              >
-                <CheckCircle2 className="w-5 h-5 text-white" />
+              <h1 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold text-navy leading-tight mb-4">
+                Empowering Global Talent.
+                <br />
+                <span style={{ color: "oklch(0.62 0.12 187)" }}>
+                  Building Exceptional Careers.
+                </span>
+              </h1>
+              <p className="text-sm font-bold text-navy mb-6">
+                👉 &ldquo;Career + Financial Stability Solutions for Students
+                &amp; Professionals in the U.S&rdquo;
+              </p>
+              <p className="text-base text-muted-foreground leading-relaxed mb-4 max-w-lg">
+                At US Workforce Transition Services Ltd., we specialize in
+                helping international students and professionals navigate the
+                U.S. job market with confidence. From landing your first role to
+                advancing your career, we connect you with trusted employers and
+                real, verified opportunities across the United States.
+              </p>
+              <p className="text-base text-muted-foreground leading-relaxed mb-8 max-w-lg">
+                Whether you're building your future or growing your team, we
+                turn ambition into results.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <a href="#contact">
+                  <Button
+                    size="lg"
+                    data-ocid="hero.find_talent.button"
+                    className="text-white hover:opacity-90 transition-opacity px-7"
+                    style={{
+                      backgroundColor: "oklch(0.22 0.055 218)",
+                    }}
+                  >
+                    Find Talent
+                  </Button>
+                </a>
+                <a href="#services">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    data-ocid="hero.explore.button"
+                    className="border-2 hover:text-white transition-all px-7"
+                    style={{
+                      borderColor: "oklch(0.62 0.12 187)",
+                      color: "oklch(0.62 0.12 187)",
+                    }}
+                  >
+                    Explore Opportunities
+                  </Button>
+                </a>
               </div>
-              <div>
-                <p className="text-sm font-bold text-white">500+ Placements</p>
-                <p className="text-xs text-white/70">Across California</p>
+            </motion.div>
+
+            {/* Right image */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+              className="relative"
+            >
+              <div className="rounded-2xl overflow-hidden shadow-brand">
+                <img
+                  src="/assets/generated/hero-office.dim_800x600.jpg"
+                  alt="Professional office environment"
+                  className="w-full h-80 lg:h-[440px] object-cover"
+                />
               </div>
-            </div>
-          </motion.div>
+              {/* Floating stat card */}
+              <div className="absolute -bottom-5 -left-5 bg-white rounded-xl px-5 py-4 shadow-brand flex items-center gap-3">
+                <div
+                  className="w-10 h-10 rounded-full flex items-center justify-center"
+                  style={{ backgroundColor: "oklch(0.62 0.12 187 / 0.15)" }}
+                >
+                  <CheckCircle2
+                    className="w-5 h-5"
+                    style={{ color: "oklch(0.62 0.12 187)" }}
+                  />
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-navy">500+ Placements</p>
+                  <p className="text-xs text-muted-foreground">
+                    Across California
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -2033,18 +2045,6 @@ export default function App() {
               "We didn't just study at schools—we understand the whole process."
             </p>
           </motion.div>
-          <div className="flex items-center justify-center gap-8 my-6">
-            <img
-              src="/assets/uploads/images_1-019d3768-98bc-736e-b862-7719d55676d0-2.jpg"
-              alt="Westcliff University"
-              className="w-20 h-20 rounded-full object-cover border-2 border-white/30 shadow-lg"
-            />
-            <img
-              src="/assets/uploads/images_1-019d3768-98c6-770c-bb42-7390817e5e55-1.png"
-              alt="UC Irvine"
-              className="w-20 h-20 rounded-full object-cover border-2 border-white/30 shadow-lg"
-            />
-          </div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -2088,11 +2088,15 @@ export default function App() {
               }}
             >
               <div className="flex items-center gap-3 mb-4">
-                <img
-                  src="/assets/uploads/images_1-019d3768-98bc-736e-b862-7719d55676d0-2.jpg"
-                  alt="Westcliff University Logo"
-                  className="w-16 h-16 rounded-full object-cover"
-                />
+                <div
+                  className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm"
+                  style={{
+                    backgroundColor: "oklch(0.75 0.15 85)",
+                    color: "oklch(0.15 0.03 240)",
+                  }}
+                >
+                  WU
+                </div>
                 <h3 className="text-xl font-bold text-white">
                   Westcliff Specific Mastery
                 </h3>
@@ -2118,11 +2122,15 @@ export default function App() {
               }}
             >
               <div className="flex items-center gap-3 mb-4">
-                <img
-                  src="/assets/uploads/images_1-019d3768-98c6-770c-bb42-7390817e5e55-1.png"
-                  alt="UC Irvine Logo"
-                  className="w-16 h-16 rounded-full object-cover"
-                />
+                <div
+                  className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm"
+                  style={{
+                    backgroundColor: "oklch(0.55 0.18 240)",
+                    color: "white",
+                  }}
+                >
+                  UCI
+                </div>
                 <h3 className="text-xl font-bold text-white">
                   UCI Innovation & Network
                 </h3>
