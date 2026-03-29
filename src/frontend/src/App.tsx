@@ -1449,9 +1449,9 @@ export default function App() {
             className="max-w-2xl"
           >
             <img
-              src="/assets/uploads/gemini_generated_image_k9e53pk9e53pk9e5-019d374d-4ef9-7359-b9c3-2ca60b3ec8ef-1.png"
+              src="/assets/uploads/gemini_generated_image_yaad8myaad8myaad-019d3792-2aac-7180-b7c4-0700123017c9-1.png"
               alt="US Workforce Transition Services Logo"
-              className="w-48 object-contain mb-6 brightness-0 invert"
+              className="w-56 object-contain mb-6"
             />
             <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-teal mb-4">
               <Star className="w-3.5 h-3.5" />
