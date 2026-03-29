@@ -7,7 +7,9 @@ export interface None {
     __kind__: "None";
 }
 export type Option<T> = Some<T> | None;
-export interface ContactFormSubmission {
+export interface Consultation {
+    id: bigint;
+    status: string;
     name: string;
     email: string;
     message: string;
@@ -16,6 +18,9 @@ export interface ContactFormSubmission {
 }
 export type Time = bigint;
 export interface backendInterface {
-    getAllSubmissions(): Promise<Array<ContactFormSubmission>>;
-    submitContactForm(name: string, email: string, phone: string | null, message: string): Promise<void>;
+    getAllConsultations(): Promise<Array<Consultation>>;
+    getPageVisitCount(): Promise<bigint>;
+    recordPageVisit(): Promise<void>;
+    submitConsultation(name: string, email: string, phone: string | null, message: string): Promise<bigint>;
+    updateConsultationStatus(id: bigint, newStatus: string): Promise<boolean>;
 }

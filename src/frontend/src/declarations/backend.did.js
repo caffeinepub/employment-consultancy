@@ -9,7 +9,9 @@
 import { IDL } from '@icp-sdk/core/candid';
 
 export const Time = IDL.Int;
-export const ContactFormSubmission = IDL.Record({
+export const Consultation = IDL.Record({
+  'id' : IDL.Nat,
+  'status' : IDL.Text,
   'name' : IDL.Text,
   'email' : IDL.Text,
   'message' : IDL.Text,
@@ -18,23 +20,24 @@ export const ContactFormSubmission = IDL.Record({
 });
 
 export const idlService = IDL.Service({
-  'getAllSubmissions' : IDL.Func(
-      [],
-      [IDL.Vec(ContactFormSubmission)],
-      ['query'],
-    ),
-  'submitContactForm' : IDL.Func(
+  'getAllConsultations' : IDL.Func([], [IDL.Vec(Consultation)], ['query']),
+  'getPageVisitCount' : IDL.Func([], [IDL.Nat], ['query']),
+  'recordPageVisit' : IDL.Func([], [], []),
+  'submitConsultation' : IDL.Func(
       [IDL.Text, IDL.Text, IDL.Opt(IDL.Text), IDL.Text],
-      [],
+      [IDL.Nat],
       [],
     ),
+  'updateConsultationStatus' : IDL.Func([IDL.Nat, IDL.Text], [IDL.Bool], []),
 });
 
 export const idlInitArgs = [];
 
 export const idlFactory = ({ IDL }) => {
   const Time = IDL.Int;
-  const ContactFormSubmission = IDL.Record({
+  const Consultation = IDL.Record({
+    'id' : IDL.Nat,
+    'status' : IDL.Text,
     'name' : IDL.Text,
     'email' : IDL.Text,
     'message' : IDL.Text,
@@ -43,16 +46,15 @@ export const idlFactory = ({ IDL }) => {
   });
   
   return IDL.Service({
-    'getAllSubmissions' : IDL.Func(
-        [],
-        [IDL.Vec(ContactFormSubmission)],
-        ['query'],
-      ),
-    'submitContactForm' : IDL.Func(
+    'getAllConsultations' : IDL.Func([], [IDL.Vec(Consultation)], ['query']),
+    'getPageVisitCount' : IDL.Func([], [IDL.Nat], ['query']),
+    'recordPageVisit' : IDL.Func([], [], []),
+    'submitConsultation' : IDL.Func(
         [IDL.Text, IDL.Text, IDL.Opt(IDL.Text), IDL.Text],
-        [],
+        [IDL.Nat],
         [],
       ),
+    'updateConsultationStatus' : IDL.Func([IDL.Nat, IDL.Text], [IDL.Bool], []),
   });
 };
 

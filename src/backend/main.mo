@@ -1,39 +1,81 @@
-import Text "mo:core/Text";
-import Int "mo:core/Int";
-import Time "mo:core/Time";
-import Order "mo:core/Order";
-import Array "mo:core/Array";
 import List "mo:core/List";
+import Nat "mo:core/Nat";
+import Order "mo:core/Order";
+import Time "mo:core/Time";
+import Array "mo:core/Array";
+import Int "mo:core/Int";
+
+
 
 actor {
-  type ContactFormSubmission = {
+  type Consultation = {
+    id : Nat;
     name : Text;
     email : Text;
     phone : ?Text;
     message : Text;
     timestamp : Time.Time;
+    status : Text;
   };
 
-  module ContactFormSubmission {
-    public func compare(submission1 : ContactFormSubmission, submission2 : ContactFormSubmission) : Order.Order {
-      Int.compare(submission2.timestamp, submission1.timestamp);
+  module Consultation {
+    public func compareByTimestampDescending(consultation1 : Consultation, consultation2 : Consultation) : Order.Order {
+      Int.compare(consultation2.timestamp, consultation1.timestamp);
     };
   };
 
-  let submissions = List.empty<ContactFormSubmission>();
+  var nextId = 1;
+  let consultations = List.empty<Consultation>();
+  var pageVisitCount = 0;
 
-  public shared ({ caller }) func submitContactForm(name : Text, email : Text, phone : ?Text, message : Text) : async () {
-    let submission : ContactFormSubmission = {
+  // Submit a new consultation form entry
+  public shared ({ caller }) func submitConsultation(name : Text, email : Text, phone : ?Text, message : Text) : async Nat {
+    let consultation : Consultation = {
+      id = nextId;
       name;
       email;
       phone;
       message;
       timestamp = Time.now();
+      status = "new";
     };
-    submissions.add(submission);
+    consultations.add(consultation);
+    nextId += 1;
+    consultation.id;
   };
 
-  public query ({ caller }) func getAllSubmissions() : async [ContactFormSubmission] {
-    submissions.toArray().sort();
+  // Get all submissions sorted by newest first
+  public query ({ caller }) func getAllConsultations() : async [Consultation] {
+    consultations.toArray().sort(Consultation.compareByTimestampDescending);
+  };
+
+  // Update the status of a submission by id
+  public shared ({ caller }) func updateConsultationStatus(id : Nat, newStatus : Text) : async Bool {
+    let found = consultations.any(func(c) { c.id == id });
+    if (not found) { return false };
+
+    let updatedConsultations = consultations.map<Consultation, Consultation>(
+      func(consultation) {
+        if (consultation.id == id) {
+          { consultation with status = newStatus };
+        } else {
+          consultation;
+        };
+      }
+    );
+
+    consultations.clear();
+    consultations.addAll(updatedConsultations.values());
+    true;
+  };
+
+  // Record a page visit
+  public shared ({ caller }) func recordPageVisit() : async () {
+    pageVisitCount += 1;
+  };
+
+  // Get the total page visit count
+  public query ({ caller }) func getPageVisitCount() : async Nat {
+    pageVisitCount;
   };
 };

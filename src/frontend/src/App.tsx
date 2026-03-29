@@ -28,6 +28,7 @@ import {
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { useActor } from "./hooks/useActor";
 import { useSubmitContactForm } from "./hooks/useQueries";
 
 const LINKEDIN_URL =
@@ -1266,6 +1267,11 @@ export default function App() {
   }>({});
 
   const submitMutation = useSubmitContactForm();
+  const { actor } = useActor();
+
+  useEffect(() => {
+    if (actor) actor.recordPageVisit().catch(() => {});
+  }, [actor]);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);

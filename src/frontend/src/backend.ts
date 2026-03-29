@@ -89,7 +89,9 @@ export class ExternalBlob {
         return this;
     }
 }
-export interface ContactFormSubmission {
+export interface Consultation {
+    id: bigint;
+    status: string;
     name: string;
     email: string;
     message: string;
@@ -98,54 +100,103 @@ export interface ContactFormSubmission {
 }
 export type Time = bigint;
 export interface backendInterface {
-    getAllSubmissions(): Promise<Array<ContactFormSubmission>>;
-    submitContactForm(name: string, email: string, phone: string | null, message: string): Promise<void>;
+    getAllConsultations(): Promise<Array<Consultation>>;
+    getPageVisitCount(): Promise<bigint>;
+    recordPageVisit(): Promise<void>;
+    submitConsultation(name: string, email: string, phone: string | null, message: string): Promise<bigint>;
+    updateConsultationStatus(id: bigint, newStatus: string): Promise<boolean>;
 }
-import type { ContactFormSubmission as _ContactFormSubmission, Time as _Time } from "./declarations/backend.did.d.ts";
+import type { Consultation as _Consultation, Time as _Time } from "./declarations/backend.did.d.ts";
 export class Backend implements backendInterface {
     constructor(private actor: ActorSubclass<_SERVICE>, private _uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, private _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, private processError?: (error: unknown) => never){}
-    async getAllSubmissions(): Promise<Array<ContactFormSubmission>> {
+    async getAllConsultations(): Promise<Array<Consultation>> {
         if (this.processError) {
             try {
-                const result = await this.actor.getAllSubmissions();
+                const result = await this.actor.getAllConsultations();
                 return from_candid_vec_n1(this._uploadFile, this._downloadFile, result);
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.getAllSubmissions();
+            const result = await this.actor.getAllConsultations();
             return from_candid_vec_n1(this._uploadFile, this._downloadFile, result);
         }
     }
-    async submitContactForm(arg0: string, arg1: string, arg2: string | null, arg3: string): Promise<void> {
+    async getPageVisitCount(): Promise<bigint> {
         if (this.processError) {
             try {
-                const result = await this.actor.submitContactForm(arg0, arg1, to_candid_opt_n5(this._uploadFile, this._downloadFile, arg2), arg3);
+                const result = await this.actor.getPageVisitCount();
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.submitContactForm(arg0, arg1, to_candid_opt_n5(this._uploadFile, this._downloadFile, arg2), arg3);
+            const result = await this.actor.getPageVisitCount();
+            return result;
+        }
+    }
+    async recordPageVisit(): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.recordPageVisit();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.recordPageVisit();
+            return result;
+        }
+    }
+    async submitConsultation(arg0: string, arg1: string, arg2: string | null, arg3: string): Promise<bigint> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.submitConsultation(arg0, arg1, to_candid_opt_n5(this._uploadFile, this._downloadFile, arg2), arg3);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.submitConsultation(arg0, arg1, to_candid_opt_n5(this._uploadFile, this._downloadFile, arg2), arg3);
+            return result;
+        }
+    }
+    async updateConsultationStatus(arg0: bigint, arg1: string): Promise<boolean> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.updateConsultationStatus(arg0, arg1);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.updateConsultationStatus(arg0, arg1);
             return result;
         }
     }
 }
-function from_candid_ContactFormSubmission_n2(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _ContactFormSubmission): ContactFormSubmission {
+function from_candid_Consultation_n2(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _Consultation): Consultation {
     return from_candid_record_n3(_uploadFile, _downloadFile, value);
 }
 function from_candid_opt_n4(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [string]): string | null {
     return value.length === 0 ? null : value[0];
 }
 function from_candid_record_n3(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+    id: bigint;
+    status: string;
     name: string;
     email: string;
     message: string;
     timestamp: _Time;
     phone: [] | [string];
 }): {
+    id: bigint;
+    status: string;
     name: string;
     email: string;
     message: string;
@@ -153,6 +204,8 @@ function from_candid_record_n3(_uploadFile: (file: ExternalBlob) => Promise<Uint
     phone?: string;
 } {
     return {
+        id: value.id,
+        status: value.status,
         name: value.name,
         email: value.email,
         message: value.message,
@@ -160,8 +213,8 @@ function from_candid_record_n3(_uploadFile: (file: ExternalBlob) => Promise<Uint
         phone: record_opt_to_undefined(from_candid_opt_n4(_uploadFile, _downloadFile, value.phone))
     };
 }
-function from_candid_vec_n1(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Array<_ContactFormSubmission>): Array<ContactFormSubmission> {
-    return value.map((x)=>from_candid_ContactFormSubmission_n2(_uploadFile, _downloadFile, x));
+function from_candid_vec_n1(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Array<_Consultation>): Array<Consultation> {
+    return value.map((x)=>from_candid_Consultation_n2(_uploadFile, _downloadFile, x));
 }
 function to_candid_opt_n5(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: string | null): [] | [string] {
     return value === null ? candid_none() : candid_some(value);

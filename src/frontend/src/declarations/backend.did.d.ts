@@ -10,7 +10,9 @@ import type { ActorMethod } from '@icp-sdk/core/agent';
 import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
-export interface ContactFormSubmission {
+export interface Consultation {
+  'id' : bigint,
+  'status' : string,
   'name' : string,
   'email' : string,
   'message' : string,
@@ -19,11 +21,14 @@ export interface ContactFormSubmission {
 }
 export type Time = bigint;
 export interface _SERVICE {
-  'getAllSubmissions' : ActorMethod<[], Array<ContactFormSubmission>>,
-  'submitContactForm' : ActorMethod<
+  'getAllConsultations' : ActorMethod<[], Array<Consultation>>,
+  'getPageVisitCount' : ActorMethod<[], bigint>,
+  'recordPageVisit' : ActorMethod<[], undefined>,
+  'submitConsultation' : ActorMethod<
     [string, string, [] | [string], string],
-    undefined
+    bigint
   >,
+  'updateConsultationStatus' : ActorMethod<[bigint, string], boolean>,
 }
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];
