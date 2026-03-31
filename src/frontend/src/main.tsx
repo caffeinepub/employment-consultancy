@@ -17,12 +17,9 @@ declare global {
 
 const queryClient = new QueryClient();
 
-// Detect /admin route (pathname or hash-based)
 const isAdmin =
   window.location.pathname === "/admin" ||
-  window.location.pathname.startsWith("/admin/") ||
-  window.location.hash === "#/admin" ||
-  window.location.hash.startsWith("#/admin/");
+  window.location.pathname === "/admin/";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <QueryClientProvider client={queryClient}>
