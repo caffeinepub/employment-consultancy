@@ -9,6 +9,7 @@ import {
   BookOpen,
   Briefcase,
   CheckCircle2,
+  ChevronDown,
   FileText,
   GraduationCap,
   Heart,
@@ -43,6 +44,49 @@ const NAV_LINKS = [
   { label: "Alumni Promise", href: "#alumni-promise" },
   { label: "Testimonials", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
+];
+
+const VISA_SERVICES = [
+  {
+    emoji: "🎓",
+    title: "F1 Student Visa",
+    anchor: "#visa-f1",
+    services: [
+      "University admissions guidance",
+      "Interview preparation",
+      "Financial documentation support",
+    ],
+  },
+  {
+    emoji: "👨‍👩‍👧",
+    title: "F2 Dependent Visa",
+    anchor: "#visa-f2",
+    services: [
+      "Spouse & children application",
+      "Documentation checklist",
+      "Interview tips",
+    ],
+  },
+  {
+    emoji: "🌍",
+    title: "J1 Exchange Visa",
+    anchor: "#visa-j1",
+    services: [
+      "Internship & training programs",
+      "Sponsor guidance",
+      "Cultural exchange support",
+    ],
+  },
+  {
+    emoji: "✈️",
+    title: "B1/B2 Visitor Visa",
+    anchor: "#visa-b1b2",
+    services: [
+      "Tourism & business travel",
+      "Invitation letter guidance",
+      "Strong profile building",
+    ],
+  },
 ];
 
 const MEDIA_IMAGES = [
@@ -1250,6 +1294,7 @@ function StarRating({ count, total = 5 }: { count: number; total?: number }) {
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [visaDropdownOpen, setVisaDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [form, setForm] = useState({
     name: "",
@@ -1358,6 +1403,44 @@ export default function App() {
                   {link.label}
                 </a>
               ))}
+
+              {/* US Visa Services Dropdown */}
+              <div
+                className="relative"
+                onMouseEnter={() => setVisaDropdownOpen(true)}
+                onMouseLeave={() => setVisaDropdownOpen(false)}
+              >
+                <button
+                  type="button"
+                  data-ocid="nav.visa-services.button"
+                  className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-navy transition-colors"
+                  aria-haspopup="true"
+                  aria-expanded={visaDropdownOpen}
+                >
+                  US Visa Services
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform duration-200 ${visaDropdownOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {visaDropdownOpen && (
+                  <div
+                    className="absolute top-full left-0 mt-2 w-52 bg-white rounded-xl shadow-lg border border-border py-2 z-50"
+                    data-ocid="nav.visa-services.dropdown_menu"
+                  >
+                    {VISA_SERVICES.map((visa) => (
+                      <a
+                        key={visa.title}
+                        href="#visa-services"
+                        data-ocid={`nav.visa.${visa.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}.link`}
+                        className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-foreground hover:bg-slate-50 hover:text-navy transition-colors"
+                      >
+                        <span className="text-base">{visa.emoji}</span>
+                        <span className="font-medium">{visa.title}</span>
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
             </nav>
 
             {/* Desktop CTA */}
@@ -1414,6 +1497,41 @@ export default function App() {
                 {link.label}
               </a>
             ))}
+
+            {/* Mobile Visa Services */}
+            <div className="flex flex-col gap-2">
+              <button
+                type="button"
+                data-ocid="nav.mobile.visa-services.toggle"
+                className="flex items-center justify-between text-sm font-medium text-foreground w-full"
+                onClick={() => setVisaDropdownOpen((prev) => !prev)}
+                aria-expanded={visaDropdownOpen}
+              >
+                <span>US Visa Services</span>
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-200 ${visaDropdownOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+              {visaDropdownOpen && (
+                <div
+                  className="flex flex-col gap-2 pl-4 border-l-2"
+                  style={{ borderColor: "oklch(0.62 0.12 187)" }}
+                >
+                  {VISA_SERVICES.map((visa) => (
+                    <a
+                      key={visa.title}
+                      href="#visa-services"
+                      data-ocid={`nav.mobile.visa.${visa.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}.link`}
+                      className="flex items-center gap-2 text-sm text-muted-foreground hover:text-navy transition-colors"
+                    >
+                      <span>{visa.emoji}</span>
+                      <span>{visa.title}</span>
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+
             <Button
               variant="outline"
               size="sm"
@@ -1597,6 +1715,115 @@ export default function App() {
         </div>
       </section>
 
+      {/* ───── US VISA SERVICES ───── */}
+      <section
+        id="visa-services"
+        className="py-20 lg:py-28 bg-white"
+        data-ocid="visa-services.section"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-14"
+          >
+            <p
+              className="text-xs font-semibold uppercase tracking-widest mb-3"
+              style={{ color: "oklch(0.62 0.12 187)" }}
+            >
+              Immigration Consulting
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-navy mb-4">
+              US Visa Services
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Expert guidance for every US visa category — from student visas to
+              visitor visas, we navigate the process with you.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {VISA_SERVICES.map((visa, i) => (
+              <motion.div
+                key={visa.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="bg-white rounded-2xl p-6 shadow-card hover:shadow-brand transition-all duration-300 border border-border group hover:-translate-y-1"
+                data-ocid={`visa-services.item.${i + 1}`}
+              >
+                <div
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 text-2xl"
+                  style={{ backgroundColor: "oklch(0.22 0.055 218 / 0.07)" }}
+                >
+                  {visa.emoji}
+                </div>
+                <h3 className="text-base font-bold text-navy mb-4 leading-snug">
+                  {visa.title}
+                </h3>
+                <ul className="space-y-2 mb-6">
+                  {visa.services.map((service) => (
+                    <li
+                      key={service}
+                      className="flex items-start gap-2 text-sm text-muted-foreground"
+                    >
+                      <CheckCircle2
+                        className="w-4 h-4 mt-0.5 shrink-0"
+                        style={{ color: "oklch(0.62 0.12 187)" }}
+                      />
+                      <span>{service}</span>
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href="#contact"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold transition-all group-hover:gap-2"
+                  style={{ color: "oklch(0.62 0.12 187)" }}
+                  data-ocid={`visa-services.get-help.${i + 1}.link`}
+                >
+                  Get Help
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* CTA Banner */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="mt-12 rounded-2xl p-8 text-center text-white"
+            style={{
+              background:
+                "linear-gradient(135deg, oklch(0.22 0.055 218), oklch(0.35 0.1 218))",
+            }}
+          >
+            <h3 className="text-xl font-bold mb-2">
+              Ready to Start Your US Visa Journey?
+            </h3>
+            <p className="text-white/80 mb-6 max-w-xl mx-auto text-sm">
+              Our visa consultants have helped hundreds of applicants achieve
+              approval. Book a free consultation today.
+            </p>
+            <a href="#contact">
+              <Button
+                className="text-navy font-semibold px-6 py-2.5"
+                style={{ backgroundColor: "oklch(0.82 0.15 85)" }}
+                data-ocid="visa-services.cta.primary_button"
+              >
+                Book Free Consultation
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ───── MEDIA ───── */}
       <section
         id="media"
@@ -1771,6 +1998,144 @@ export default function App() {
                   </div>
                 ))}
               </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ───── FROM THE FOUNDER'S DESK ───── */}
+      <section
+        id="founders"
+        className="py-20 lg:py-28"
+        style={{ backgroundColor: "oklch(0.97 0.005 218)" }}
+        data-ocid="founders.section"
+      >
+        <div className="max-w-6xl mx-auto px-6">
+          {/* Section header */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <p
+              className="text-xs font-bold uppercase tracking-widest mb-3"
+              style={{ color: "oklch(0.62 0.12 187)" }}
+            >
+              Leadership
+            </p>
+            <h2
+              className="text-3xl md:text-4xl font-bold mb-4"
+              style={{ color: "oklch(0.22 0.055 218)" }}
+            >
+              From the Founder&apos;s Desk
+            </h2>
+            {/* Shared message */}
+            <div
+              className="max-w-2xl mx-auto mt-6 rounded-2xl p-7 text-left shadow-sm"
+              style={{
+                backgroundColor: "oklch(1 0 0)",
+                borderLeft: "4px solid oklch(0.62 0.12 187)",
+              }}
+            >
+              <svg
+                className="w-8 h-8 mb-4 opacity-30"
+                style={{ color: "oklch(0.62 0.12 187)" }}
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                role="presentation"
+              >
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+              </svg>
+              <p className="text-base text-foreground leading-relaxed mb-4">
+                At US Workforce Transition Services, we believe that every
+                individual deserves the opportunity to build a successful future
+                in the United States.
+              </p>
+              <p className="text-base text-foreground leading-relaxed mb-4">
+                As someone who has personally experienced the challenges of
+                navigating careers, visas, and international transitions, I
+                understand how overwhelming the process can be.
+              </p>
+              <p
+                className="text-base font-medium leading-relaxed"
+                style={{ color: "oklch(0.22 0.055 218)" }}
+              >
+                That is why we are committed to more than just consultancy.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Founder cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            {/* Hassan Ameen */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="flex flex-col items-center text-center bg-white rounded-2xl p-8 shadow-md"
+              data-ocid="founders.item.1"
+            >
+              <div className="w-40 h-40 rounded-full overflow-hidden mb-5 ring-4 ring-teal-300/30">
+                <img
+                  src="/assets/whatsapp_image_2026-04-02_at_11.33.26_pm_2-019d5227-ce61-7501-a1ba-649a70ce82ba.jpeg"
+                  alt="Hassan Ameen"
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
+              <h3
+                className="text-xl font-bold mb-1"
+                style={{ color: "oklch(0.22 0.055 218)" }}
+              >
+                Hassan Ameen
+              </h3>
+              <p
+                className="text-sm font-semibold uppercase tracking-wider"
+                style={{ color: "oklch(0.62 0.12 187)" }}
+              >
+                Co-Founder &amp; CEO
+              </p>
+              <div
+                className="w-12 h-0.5 rounded-full mt-4"
+                style={{ backgroundColor: "oklch(0.62 0.12 187)" }}
+              />
+            </motion.div>
+
+            {/* Tyler Chi Wang */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="flex flex-col items-center text-center bg-white rounded-2xl p-8 shadow-md"
+              data-ocid="founders.item.2"
+            >
+              <div className="w-40 h-40 rounded-full overflow-hidden mb-5 ring-4 ring-teal-300/30">
+                <img
+                  src="/assets/bc3d117d-9844-447e-bb0f-d94e4e7ed3c6-019d5228-0573-7183-9dab-5855dae65433.png"
+                  alt="Tyler Chi Wang"
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
+              <h3
+                className="text-xl font-bold mb-1"
+                style={{ color: "oklch(0.22 0.055 218)" }}
+              >
+                Tyler Chi Wang
+              </h3>
+              <p
+                className="text-sm font-semibold uppercase tracking-wider"
+                style={{ color: "oklch(0.62 0.12 187)" }}
+              >
+                Co-Founder &amp; CEO
+              </p>
+              <div
+                className="w-12 h-0.5 rounded-full mt-4"
+                style={{ backgroundColor: "oklch(0.62 0.12 187)" }}
+              />
             </motion.div>
           </div>
         </div>
@@ -2705,6 +3070,14 @@ export default function App() {
                   {link.label}
                 </a>
               ))}
+              <a
+                href="#visa-services"
+                data-ocid="footer.visa-services.link"
+                className="text-xs transition-opacity hover:opacity-75"
+                style={{ color: "oklch(1 0 0 / 0.6)" }}
+              >
+                US Visa Services
+              </a>
             </nav>
 
             {/* Social */}
